@@ -1123,6 +1123,9 @@ function tmerge(typea::ANY, typeb::ANY)
     if is(typeb,NF)
         return typea
     end
+    if typea <: Tuple && typeb <: Tuple && !(typea <: typeb || typeb <: typea)
+        typea = Union(typea,Tuple)
+    end
     if typea <: typeb
         return typeb
     end
